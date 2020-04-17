@@ -1,6 +1,6 @@
 /**
-* Template Name: Selecao - v2.0.0
-* Template URL: https://bootstrapmade.com/selecao-bootstrap-template/
+* Template Name: Vlava - v2.0.0
+* Template URL: https://bootstrapmade.com/vlava-free-bootstrap-one-page-template/
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
@@ -15,9 +15,14 @@
       if (target.length) {
 
         var scrollto = target.offset().top;
+        var scrolled = 20;
 
         if ($('#header').length) {
           scrollto -= $('#header').outerHeight()
+
+          if (!$('#header').hasClass('header-scrolled')) {
+            scrollto += scrolled;
+          }
         }
 
         if ($(this).attr("href") == '#header') {
@@ -95,9 +100,6 @@
         }
         main_nav.find('a[href="#' + $(this).attr('id') + '"]').parent('li').addClass('active');
       }
-      if (cur_pos < 300) {
-        $(".nav-menu ul:first li:first").addClass('active');
-      }
     });
   });
 
@@ -112,34 +114,6 @@
 
   if ($(window).scrollTop() > 100) {
     $('#header').addClass('header-scrolled');
-  }
-
-  // Intro carousel
-  var heroCarousel = $("#heroCarousel");
-
-  heroCarousel.on('slid.bs.carousel', function(e) {
-    $(this).find('h2').addClass('animated fadeInDown');
-    $(this).find('p').addClass('animated fadeInUp');
-    $(this).find('.btn-get-started').addClass('animated fadeInUp');
-  });
-
-  // Initate the hero bottom waves
-  if ($('#wave1').length && $('#wave2').length) {
-    wavify(document.querySelector('#wave1'), {
-      height: 40,
-      bones: 4,
-      amplitude: 40,
-      color: '#fff',
-      speed: .15
-    });
-
-    wavify(document.querySelector('#wave2'), {
-      height: 20,
-      bones: 3,
-      amplitude: 40,
-      color: 'rgba(255, 255, 255, .1)',
-      speed: .25
-    });
   }
 
   // Back to top button
@@ -158,10 +132,19 @@
     return false;
   });
 
+  // Testimonials carousel (uses the Owl Carousel library)
+  $(".testimonials-carousel").owlCarousel({
+    autoplay: true,
+    dots: true,
+    loop: true,
+    items: 1
+  });
+
   // Porfolio isotope and filter
   $(window).on('load', function() {
     var portfolioIsotope = $('.portfolio-container').isotope({
-      itemSelector: '.portfolio-item'
+      itemSelector: '.portfolio-item',
+      layoutMode: 'fitRows'
     });
 
     $('#portfolio-flters li').on('click', function() {
@@ -179,38 +162,12 @@
     });
   });
 
-  // Testimonials carousel (uses the Owl Carousel library)
-  $(".testimonials-carousel").owlCarousel({
-    autoplay: true,
-    dots: true,
-    loop: true,
-    responsive: {
-      0: {
-        items: 1
-      },
-      768: {
-        items: 2
-      },
-      900: {
-        items: 3
-      }
-    }
-  });
-
   // Portfolio details carousel
   $(".portfolio-details-carousel").owlCarousel({
     autoplay: true,
     dots: true,
     loop: true,
     items: 1
-  });
-
-  // Initi AOS
-  AOS.init({
-    duration: 1000,
-    easing: "ease-in-out",
-    once: true,
-    mirror: false
   });
 
 })(jQuery);
